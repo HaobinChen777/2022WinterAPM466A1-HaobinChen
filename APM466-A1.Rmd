@@ -1,0 +1,175 @@
+---
+title: "APM466-A1"
+author: "Haobin Chen"
+date: "2022/2/3"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE}
+install.packages("ggplot2")
+install.packages("stats")
+install.packages("tidyverse")
+```
+```{r echo=FALSE}
+library(ggplot2)
+library(stats)
+library(tidyverse)
+```
+
+```{r echo=TRUE}
+bond_data <- read.csv("bond_data_csv.csv")%>%as.data.frame()
+AI = c(0, 0, 0, 0, 2/6*0.25, 2/6*0.75, 1/6*1.25, 1/6*0.25, 1/6*1)
+```
+
+
+```{r echo=TRUE}
+YTM_data <- read.csv("YTM_result_csv.csv")%>%as.data.frame()
+```
+```{r echo=TRUE}
+Time <- c(0.5,1,1.5,2,2.5,3,3.5,4,4.5,5)
+plot(Time, YTM_data$YTM1,ylim = c(0,0.017),ylab ="YTM Rate",main ="YTM Rate Changes in Time",col="blue",pch="o",lty=1)
+lines(Time, YTM_data$YTM1,col="blue")
+
+points(Time, YTM_data$YTM2,col="red",pch="o")
+lines(Time, YTM_data$YTM2,col="red",lty=1)
+
+points(Time, YTM_data$YTM3,col="green",pch="o")
+lines(Time, YTM_data$YTM3,col="green",lty=1)
+
+points(Time, YTM_data$YTM4,col="yellow",pch="o")
+lines(Time, YTM_data$YTM4,col="yellow",lty=1)
+
+points(Time, YTM_data$YTM5,col="pink",pch="o")
+lines(Time, YTM_data$YTM5,col="pink",lty=1)
+
+points(Time, YTM_data$YTM6,col="black",pch="o")
+lines(Time, YTM_data$YTM6,col="black",lty=1)
+
+points(Time, YTM_data$YTM7,col="brown",pch="o")
+lines(Time, YTM_data$YTM7,col="brown",lty=1)
+
+points(Time, YTM_data$YTM8,col="purple",pch="o")
+lines(Time, YTM_data$YTM8,col="purple",lty=1)
+
+points(Time, YTM_data$YTM9,col="gold",pch="o")
+lines(Time, YTM_data$YTM9,col="gold",lty=1)
+
+points(Time, YTM_data$YTM10,col="grey",pch="o")
+lines(Time, YTM_data$YTM10,col="grey",lty=1)
+
+
+legend("bottomright",legend=c("YTM1","YTM2","YTM3","YTM4","YTM5","YTM6","YTM7","YTM8","YTM9","YTM10"), col=c("blue","red","green","yellow","pink","black","brown","purple","gold","grey"),pch=c("o","o","o","o","o","o","o","o","o","o"),lty=c(1,1,1,1,1,1,1,1,1,1), ncol=1)
+
+```
+
+```{r echo=TRUE}
+spotrate_data <- read.csv("Spotrate_result_csv.csv")%>%as.data.frame()
+```
+```{r echo=TRUE}
+Time <- c(0.5,1,1.5,2,2.5,3,3.5,4,4.5,5)
+plot(Time, spotrate_data$r1,ylim = c(0,0.04),ylab ="Spot Rate",main ="Spot Rate Changes in Time",col="blue",pch="*",lty=1)
+lines(Time, spotrate_data$r1,col="blue")
+
+points(Time, spotrate_data$r2,col="red",pch="*")
+lines(Time, spotrate_data$r2,col="red",lty=1)
+
+points(Time, spotrate_data$r3,col="green",pch="*")
+lines(Time, spotrate_data$r3,col="green",lty=1)
+
+points(Time, spotrate_data$r4,col="yellow",pch="*")
+lines(Time, spotrate_data$r4,col="yellow",lty=1)
+
+points(Time, spotrate_data$r5,col="pink",pch="*")
+lines(Time, spotrate_data$r5,col="pink",lty=1)
+
+points(Time, spotrate_data$r6,col="black",pch="*")
+lines(Time, spotrate_data$r6,col="black",lty=1)
+
+points(Time, spotrate_data$r7,col="brown",pch="*")
+lines(Time, spotrate_data$r7,col="brown",lty=1)
+
+points(Time, spotrate_data$r8,col="purple",pch="*")
+lines(Time, spotrate_data$r8,col="purple",lty=1)
+
+points(Time, spotrate_data$r9,col="gold",pch="*")
+lines(Time, spotrate_data$r9,col="gold",lty=1)
+
+points(Time, spotrate_data$r10,col="grey",pch="*")
+lines(Time, spotrate_data$r10,col="grey",lty=1)
+
+legend("topright",legend=c("r1","r2","r3","r4","r5","r6","r7","r8","r9","r10"), col=c("blue","red","green","yellow","pink","black","brown","purple","gold","grey"),pch=c("*","*","*","*","*","*","*","*","*","*"),lty=c(1,1,1,1,1,1,1,1,1,1), ncol=1)
+
+```
+
+```{r echo=TRUE}
+frate_data <- read.csv("forwardrate_result_1.csv")%>%as.data.frame()
+
+Time <- c(1,2,3,4,5)
+plot(Time, frate_data$f1,ylim = c(0,0.1),ylab ="Forward Rate",main ="Forward Rate Changes in Time",col="blue",pch=22,lty=1)
+lines(Time, frate_data$f1,col="blue")
+
+points(Time, frate_data$f2,col="red",pch=22)
+lines(Time, frate_data$f2,col="red",lty=1)
+
+points(Time, frate_data$f3,col="green",pch=22)
+lines(Time, frate_data$f3,col="green",lty=1)
+
+points(Time, frate_data$f4,col="yellow",pch=22)
+lines(Time, frate_data$f4,col="yellow",lty=1)
+
+points(Time, frate_data$f5,col="pink",pch=22)
+lines(Time, frate_data$f5,col="pink",lty=1)
+
+points(Time, frate_data$f6,col="black",pch=22)
+lines(Time, frate_data$f6,col="black",lty=1)
+
+points(Time, frate_data$f7,col="brown",pch=22)
+lines(Time, frate_data$f7,col="brown",lty=1)
+
+points(Time, frate_data$f8,col="purple",pch=22)
+lines(Time, frate_data$f8,col="purple",lty=1)
+
+
+points(Time, frate_data$f9,col="gold",pch=22)
+lines(Time, frate_data$f9,col="gold",lty=1)
+
+points(Time, frate_data$f10,col="grey",pch=22)
+lines(Time, frate_data$f10,col="grey",lty=1)
+
+legend("topright",legend=c("f1","f2","f3","f4","f5","f6","f7","f8","f9","f10"), col=c("blue","red","green","yellow","pink","black","brown","purple","gold","grey"),pch=c(22,22,22,22,22,22,22,22,22,22),lty=c(1,1,1,1,1,1,1,1,1,1), ncol=1,cex=0.75)
+```
+```{r echo=TRUE}
+YCdata = read_csv("YTM_C_csv.csv")%>%as.data.frame()
+YC = cbind(YCdata[1:5,1],YCdata[1:5,2],YCdata[1:5,3],YCdata[1:5,4],YCdata[1:5,5])
+cov_T <- cov(YC)
+cov_T
+eigen(cov_T)
+```
+
+
+
+```{r echo=TRUE}
+FC = cbind(frate_data[1:5,5],frate_data[1:5,7],frate_data[1:5,9],frate_data[1:5,11],frate_data[1:5,13])
+cov_F <- cov(FC)
+cov_F
+eigen(cov_F)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
